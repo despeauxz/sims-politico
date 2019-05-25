@@ -9,10 +9,10 @@ const partyRoutes = express.Router();
 const validation = [ValidationHandler.validate, trim, ValidationHandler.isEmptyReq];
 partyRoutes.use(Authorization.authorize);
 
-partyRoutes.post('/', partyValidation.createParty, validation, PartyController.create);
+partyRoutes.post('/', Authorization.authorizeAdmin, partyValidation.createParty, validation, PartyController.create);
 partyRoutes.get('/', PartyController.getAll);
 partyRoutes.get('/:id', PartyController.getOne);
-partyRoutes.patch('/:id', partyValidation.update, validation, PartyController.update);
-partyRoutes.delete('/:id', PartyController.delete);
+partyRoutes.patch('/:id', Authorization.authorizeAdmin, partyValidation.update, validation, PartyController.update);
+partyRoutes.delete('/:id', Authorization.authorizeAdmin, PartyController.delete);
 
 export default partyRoutes;

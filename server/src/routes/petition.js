@@ -10,6 +10,6 @@ const validation = [ValidationHandler.validate, trim, ValidationHandler.isEmptyR
 petitionRoutes.use(Authorization.authorize);
 
 petitionRoutes.post('/', petitionValidation.create, validation, PetitionController.create);
-petitionRoutes.get('/', PetitionController.getAll);
+petitionRoutes.get('/', Authorization.authorizeAdmin, PetitionController.getAll);
 
 export default petitionRoutes;

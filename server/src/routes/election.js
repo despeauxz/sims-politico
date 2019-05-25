@@ -10,11 +10,11 @@ const validation = [ValidationHandler.validate, trim, ValidationHandler.isEmptyR
 
 electionRoutes.use(Authorization.authorize);
 
-electionRoutes.post('/:id/register', votesValidation.candidates, validation, ElectionController.registerCandidates);
+electionRoutes.post('/:id/register', Authorization.authorizeAdmin, votesValidation.candidates, validation, ElectionController.registerCandidates);
 electionRoutes.get('/:officeId/results', ElectionController.getResults);
 electionRoutes.get('/:id/candidates', ElectionController.collectConfirmedCandidates);
-electionRoutes.patch('/candidate/:id', ElectionController.confirmCandidate);
-electionRoutes.get('/candidates', ElectionController.candidateCollection);
+electionRoutes.patch('/candidate/:id', Authorization.authorizeAdmin, ElectionController.confirmCandidate);
+electionRoutes.get('/candidates', Authorization.authorizeAdmin, ElectionController.candidateCollection);
 
 
 export default electionRoutes;
