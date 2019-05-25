@@ -1,0 +1,72 @@
+{
+  "name": "politico",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "DEBUG=app cross-env NODE_ENV=development nodemon --exec babel-node ./server/src/app.js",
+    "start": "cross-env NODE_ENV=production node ./server/dist/src/app.js",
+    "build": "npm run clean && babel ./server -d ./server/dist",
+    "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "migrate:test": "sequelize db:migrate:undo:all --env=test && sequelize db:migrate --env=test",
+    "seed": "sequelize db:seed:all",
+    "seed:test": "sequelize db:seed:all --env=test",
+    "heroku-postbuild": "npm run build",
+    "clean": "rm -rf server/dist",
+    "lint": "eslint **/*.js --fix",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha server/tests --require babel-register --recursive --timeout 50000 --exit",
+    "merge:lcov": "cat ./coverage/lcov.*.info > ./coverage/lcov.info",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/despeauxz/sims-politico.git"
+  },
+  "author": "Malik Godwin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/despeauxz/sims-politico/issues"
+  },
+  "homepage": "https://github.com/despeauxz/sims-politico#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
+    "debug": "^4.1.1",
+    "dotenv": "^8.0.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "nodemailer": "^6.1.1",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.2",
+    "random-string": "^0.2.0",
+    "sequelize": "^5.8.5",
+    "sequelize-cli": "^5.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^6.1.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2",
+    "supertest": "^4.0.2"
+  }
+}

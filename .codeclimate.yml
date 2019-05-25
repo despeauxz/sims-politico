@@ -1,0 +1,18 @@
+version: "2"
+
+engines:
+  eslint:
+    enabled: true
+
+ratings:
+  paths:
+    - "server/src/**.js"
+
+exclude_paths:
+  - "UI"
+  - ".nyc_output"
+  - "coverage"
+  - "node_modules"
+  - "server/config"
+  - "server/test"
+  - "server/docs"
