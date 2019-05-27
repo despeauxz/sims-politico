@@ -11,12 +11,16 @@ module.exports = {
     test: {
         username: process.env.DB_USERNAME || 'postgres',
         password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_DATABASE_TEST || 'twitter_clone_test',
+        database: process.env.DB_DATABASE_TEST || 'politico_test',
         host: process.env.DB_HOST || '127.0.0.1',
         dialect: 'postgres'
     },
     production: {
-        url: process.env.DATABASE_URL,
-        dialect: 'postgres'
+        use_env_variable: process.env.DATABASE_URL,
+        dialect: 'postgres',
+        dialectOptions: {
+            ssl: true,
+        },
+        logging: false,
     }
 };
