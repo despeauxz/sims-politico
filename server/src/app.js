@@ -9,6 +9,8 @@ import 'babel-polyfill';
 import apiRoutes from './routes';
 import errorHandler from './middlewares/errorHandler';
 
+console.log(process.env.NODE_ENV);
+
 const debugged = debug('app');
 config();
 
