@@ -149,7 +149,7 @@ class UserController {
     }
 
     static async refreshToken(req, res) {
-        const authUser = await models.User.findOne({ where: { email: req.email } });
+        const authUser = await models.User.findOne({ where: { email: req.user.email } });
         const user = getUserObject({ ...authUser.dataValues });
         const token = Authorization.generateToken(user);
 
@@ -160,6 +160,7 @@ class UserController {
     static tokenObj(user) {
         return {
             id: user.id,
+            email: user.email,
             isAdmin: user.isAdmin
         };
     }
